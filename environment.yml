@@ -1,0 +1,8 @@
+name: k-count
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - kmc=3.1.1rc1
+  - genomescope2=2.0
