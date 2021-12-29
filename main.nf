@@ -23,9 +23,7 @@ def show_help (){
       --remove_kmc_db               Remove kmc k-mer databases [def: false]
       Run examples:
 
-      nextflow run  digenoma-lab/k-count -r v1.0 -singularity --reads 'test_dataset/reads/*.R{1,2}.fastq.gz' --ref_fa test_dataset/genome.fa --ref_gtf test_dataset/genome.gtf
-      or
-      nextflow run  digenoma-lab/k-count -r v1.0 -singularity --bams '/path/to/bams/' --ref_fa test_dataset/genome.fa --ref_gtf test_dataset/genome.gtf
+      nextflow run  digenoma-lab/k-count -r v1.0 -singularity --reads 'test_dataset/reads/*.R{1,2}.fastq.gz' 
 
       """.stripIndent()
 }
@@ -105,14 +103,7 @@ process ckmers{
   }
 }
 
-//}
-/*
- * run arriba fusion with genomic SVs
- * In case of the Variant Call Format, the file must comply with the VCF specification for structural variants.
- * In particular, Arriba requires that the SVTYPE field be present in the INFO column and specify one of the four values BND, DEL, DUP, INV.
- * In addition, for all SVTYPEs other than BND, the END field must be present and specify the second breakpoint of the structural variant.
- * Structural variants with single breakends are silently ignored.
-*/
+//run genoescope to estimate genome size
 process genomescope {
     tag "${sample}-GS"
     cpus 1
@@ -138,7 +129,7 @@ process genomescope {
   }
 }
 
-//header for the IARC tools
+//header for the DiGenoma lab tools
 // the logo was generated using the following page
 // http://patorjk.com/software/taag  (ANSI logo generator)
 def digenoma_Header (){
@@ -158,7 +149,6 @@ Nextflow pipelines for genomics.
 //this use ANSI colors to make a short tool description
 //useful url: http://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html
 def tool_header (){
-        return """
-        K-count: (${workflow.manifest.version})
+        return """ K-count:v(${workflow.manifest.version})
         """
 }
