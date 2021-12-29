@@ -98,7 +98,7 @@ process ckmers{
   # We count the 21 mers in 12Gb memory
   kmc -k${params.kmer} -t${params.cpu} -m${params.mem} -ci1 -cs10000 @reads.txt ${sample} ${sample}-tmp
   # We create the output histogram
-  kmc_tools transform ${sample} histogram ${sample}.histo -cx10000
+  kmc_tools transform ${sample} histogram ${sample}.hist -cx10000
   ${del_kmc}
   """
   //normal reads are given as input
